@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .btn-option {
+        height: 100px;
+        width: 200px;
+        background-color: #F8C340;
+        font-size: 18px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        border-radius: 10px 10px 10px 10px;
+        -moz-border-radius: 10px 10px 10px 10px;
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border: 0px solid #000000;
+    }
+        .btn-option:hover {
+            background-color: #DFB44A;
+            color: #FBF7EC;
+        }
+        
+    .group-option{
+        display:flex;
+        justify-content : center;
+        gap:15px;
+    }
+
+
+</style>
+
+<h2>Admin Dashboard</h2>
+
+<h3> Hello User @HttpContext.Current.User.Identity.Name</h3>
+<br />
+<br />
+
+<div class="container">
+    <div class="group-option">
+        <div class="col">
+
+            <input class="btn-option" type="button" value=" Customers" onclick="@("window.location.href='" + @Url.Action("Index", "Customer") + "'");" />
+        </div>
+        <div class="col">
+            <input class="btn-option" type="button" value="Products" onclick="@("window.location.href='" + @Url.Action("Index", "Product") + "'");" />
+        </div>
+        @*<div class="col">
+            <input class="btn-option" type="button" value="Customer Contract" onclick="@("window.location.href='" + @Url.Action("AddCustomer", "Admin") + "'");" />
+        </div>
+        <div class="col">
+            <input class="btn-option" type="button" value=" Customer Address" onclick="@("window.location.href='" + @Url.Action("AddCustomer", "Admin") + "'");" />
+        </div>
+        <div class="col">
+            <input class="btn-option" type="button" value=" Customer Contact" onclick="@("window.location.href='" + @Url.Action("AddCustomer", "Admin") + "'");" />
+        </div>
+        <div class="col">
+            <input class="btn-option" type="button" value="Product" onclick="@("window.location.href='" + @Url.Action("AddCustomer", "Admin") + "'");" />
+        </div>
+        <div class="col">
+            <input class="btn-option" type="button" value="Order" onclick="@("window.location.href='" + @Url.Action("AddCustomer", "Admin") + "'");" />
+        </div>*@
+
+
+    </div>
+</div>
+

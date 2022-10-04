@@ -1,0 +1,286 @@
+﻿@model IEnumerable<Customer_Service_Admin_Panel.ModelView.AddCustomerAndAdressContext>
+
+@{
+    ViewBag.Title = "DetailsCustomer";
+}
+
+<style>
+    h3 {
+        text-align: center;
+    }
+
+    .table-grup {
+        height: 300px;
+        overflow: auto;
+    }
+</style>
+
+
+<h3>
+    Customer name :
+    @foreach (var item in Model)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationName)
+        </td>
+    }
+</h3>
+<br />
+<p>
+    <input class="btn btn-warning" type="button" value=" Customer List" onclick="@("window.location.href='" + @Url.Action("Index", "Customer") + "'");" />
+</p>
+<br />
+<br />
+<p>
+    @Html.ActionLink("Create Employee", "CreateEmployee", "Employees", new { id = Model.First().CustomerId }, new { @class = "btn btn-success" })
+
+</p>
+
+<br />
+
+<table class="table table-striped table-bordered">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StreetAddess1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StreetAddress2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsMain)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetAddess1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetAddress2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMain)
+            </td>
+
+            <td>
+
+                @Html.ActionLink("Edit", "UpdateCustomer", new { id = item.CustomerId }, new { @class = "btn btn-success" })
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.CustomerId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+    <br />
+    <br />
+    <br />
+    <h3>Contracts</h3>
+    <br />
+    @Html.ActionLink("Add Contract", "AddContract", "Contract", new { id = Model.First().CustomerId }, new { @class = "btn btn-info" })
+
+    <br />
+    <br />
+    <form>
+        <p>Find by Product Name <input type="text" name="searchContract" value="@ViewData["SearchContracts"]" /> <input type="submit" value="Search"</p>
+    </form>
+    <div class=table-grup>
+        <table class="table table-striped table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>
+                        Customer Id
+                    </th>
+                    <th>
+                        ProductId
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Signed Date
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in ViewBag.ListContract)
+            {
+                <tr>
+                    <td>
+                        @item.CustomerId
+                    </td>
+                    <td>
+                        @item.ProductId
+                    </td>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.SignedDate
+                    </td>
+
+
+                    <td>
+
+                        @Html.ActionLink("Update", "UpdateContract", "Contract", new { id = item.CustomerId , contractId = item.ContractId }, new { @class = "btn btn-success" })
+
+                        
+                        @Html.ActionLink("Delete", "DeleteContract", "Contract", new { id = item.CustomerId, contractId = item.ContractId }, new { @class = "btn btn-danger delete-contract" })
+                        
+
+                    </td>
+
+                </tr>
+            }
+           
+        </table>
+    </div>
+
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <h3>Orders</h3>
+    <br />
+    @Html.ActionLink("Add Orders", "AddOrder", "Order", new { id = Model.First().CustomerId }, new { @class = "btn btn-info" })
+
+    <br />
+    <br />
+    <form>
+        <p>Find by  <input type="text" name="searchOrder" value="@ViewData["SearchOrders"]" /> <input type="submit" value="Search"</p>
+
+    </form>
+    <div class="table-grup">
+        <table class="table table-striped table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>
+                        Order Id
+                    </th>
+                    <th>
+                        OrderTypeId
+                    </th>
+                    <th>
+                        Order Type
+                    </th>
+                    <th>
+                        Create Date
+                    </th>
+
+                    <th>
+                        Order Status
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in ViewBag.ListOrders)
+            {
+                <tr>
+                    <td>
+                        @item.OrderId
+                    </td>
+                    <td>
+                        @item.OrderTypeId
+                    </td>
+                    <td>
+                        @item.OrderType1
+                    </td>
+                    <td>
+                        @item.CreateDate
+                    </td>
+
+                    <td>
+                        @item.OrderStatus
+
+                    </td>
+
+                    <td>
+
+                        @Html.ActionLink("Edit", "UpdateOrder", "Order", new { id = item.CustomerId, orderId = item.OrderId }, new { @class = "btn btn-success" })
+
+
+                        @Html.ActionLink("Delete", "DeleteOrder", "Order", new { id = item.CustomerId, orderId = item.OrderId }, new { @class = "btn btn-danger" })
+
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+
+
+    </div>

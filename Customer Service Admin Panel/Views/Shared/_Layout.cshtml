@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Customer Services App</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+        }
+
+        .container-body{
+            margin-left:100px;
+            margin-right:100px;
+        }
+        
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Customer Services App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+
+            </div>
+
+
+            @if (Request.IsAuthenticated)
+            {
+                @Html.ActionLink("Dash Board", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+
+                using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li class="btn-group nav">
+                        <button type="button" class="btn navbar-btn" style="background-color: #1E1E1E;color:#fff;font-weight:600 ">@User.Identity.Name</button>
+                        <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" style="background-color: #1E1E1E">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                        </ul>
+
+                    </li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">
+                                Log off
+                                <span class="glyphicon glyphicon-log-out"></span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="@Url.Action("Register", "Home")">
+                            <span class="glyphicon glyphicon-registration-mark"></span>
+                            Register
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Login", "Home")">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Login
+                        </a>
+                    </li>
+                </ul>
+            }
+
+        </div>
+        </div>
+    </div>
+    <div class="container-body">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

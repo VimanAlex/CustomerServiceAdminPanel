@@ -1,0 +1,141 @@
+﻿@model Customer_Service_Admin_Panel.ModelView.AddOrder
+
+@{
+    ViewBag.Title = "AddOrder";
+}
+<style>
+    .title-employee-list {
+        text-align: center;
+    }
+
+    .table-grup {
+        height: 300px;
+        overflow: auto;
+    }
+</style>
+<h2> Orders</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <h4>Add Order</h4>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OrderTypeId, new SelectList(ViewBag.OrderTypeList, "OrderTypeId", "OrderType1"))
+
+            @Html.ValidationMessageFor(model => model.OrderTypeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" }})
+            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderStatusId, htmlAttributes: new { @class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OrderStatusId, new SelectList(ViewBag.StatusOrderList, "OrderStatusId", "OrderStatus"))
+         
+
+            @Html.ValidationMessageFor(model => model.OrderStatusId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+
+    <br />
+    <br />
+    <h3 class="title-employee-list">List Employee</h3>
+    <br />
+    <br />
+    <div class="table-grup">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsChecked)
+                </th>
+                <th></th>
+            </tr>
+
+            @for (int i = 0; i < Model.ListOfEmployees.Count; i++)
+            {
+
+                <tr>
+                    <td>
+                        @Html.TextBox("ListOfEmployees[" + @i + "].CustomerId", Model.ListOfEmployees[i].CustomerId, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.TextBox("ListOfEmployees[" + @i + "].EmployeeId", Model.ListOfEmployees[i].EmployeeId, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.TextBox("ListOfEmployees[" + @i + "].FirstName", Model.ListOfEmployees[i].FirstName, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.TextBox("ListOfEmployees[" + @i + "].LastName", Model.ListOfEmployees[i].LastName, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.CheckBox("ListOfEmployees[" + @i + "].IsChecked", Model.ListOfEmployees[i].IsChecked)
+                    </td>
+
+
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Order" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back ", "DetailsCustomer", "Admin", new { id = Model.CustomerId }, new { @class = "btn btn-warning" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
